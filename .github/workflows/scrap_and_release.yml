@@ -1,9 +1,9 @@
-# A workflow that checkes the most recent LeatrixPlus release on CurseForge that 
-# is different than the LeatricPlus verion included in this repo's release artifacts.
+# A workflow that checkes the most recent LeatrixMaps release on CurseForge that 
+# is different than the LeatricMaps verion included in this repo's release artifacts.
 # If the release is different it will download the one from CurseForge, generate a new release.json file
 # and package those assets together in a new release using the verion number as the tag and release name.
 #
-# The reason for all of this is because LeatrixPlus is not hosted on a public repo nor does it have a relase.json
+# The reason for all of this is because LeatrixMaps is not hosted on a public repo nor does it have a relase.json
 
 name: Scrap & Release
 
@@ -56,7 +56,7 @@ jobs:
         id: curl-curseforge
         run: |
           curl -H 'Accept: application/json' \
-            'https://www.curseforge.com/api/v1/mods/94855/files?pageIndex=0&pageSize=10&sort=dateCreated&sortDescending=true&removeAlphas=true' \
+            'https://www.curseforge.com/api/v1/mods/298842/files?pageIndex=0&pageSize=10&sort=dateCreated&sortDescending=true&removeAlphas=true' \
             -o curse-response.json
           fileNameRaw=$(cat curse-response.json | jq -r '.data[0].fileName')
           fileNameFixed=${fileNameRaw%.*}
@@ -106,14 +106,14 @@ jobs:
         id: get_addon_version
         if: ${{ env.MY_FILENAME != env.CURSE_FILENAME }}
         run: |
-          cd Leatrix_Plus/
+          cd Leatrix_Maps/
           echo "get_addon_version=$(cat *.toc | sed -n -E -e 's/^## Version: ([a-zA-Z0-9.-]+).*/\1/p')" >> "$GITHUB_OUTPUT"
 
       - name: Get Interface Version Number
         id: get_interface_version_num
         if: ${{ env.MY_FILENAME != env.CURSE_FILENAME }}
         run: |
-          cd Leatrix_Plus/
+          cd Leatrix_Maps/
           echo "get_interface_version_num=$(cat *.toc | sed -n -E -e 's/^## Interface: ([0-9]+).*/\1/p')" >> "$GITHUB_OUTPUT"
 
       - name: Update release.json
