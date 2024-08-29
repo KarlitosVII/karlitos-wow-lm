@@ -1,0 +1,16 @@
+{
+    "releases": [
+        {
+            "name":"Leatrix Maps",
+            "version":"11.0.01",
+            "filename": "Leatrix_Maps-11.0.01",
+            "nolib": false,
+            "metadata": [
+                {
+                    "flavor": "mainline",
+                    "interface": 110000
+                }
+            ]
+        }
+    ]
+}
